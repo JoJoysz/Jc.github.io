@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>京都·大阪红叶季 7 日手册</title>
+<style>
+:root{--bg:#f6f2ea;--card:#fffdf8;--ink:#2d2823;--mut:#8d8478;--ln:#e5dccd;--acc:#b5543b;--soft:#efe8db}
+@media(prefers-color-scheme:dark){:root{--bg:#161311;--card:#211d18;--ink:#ece5d8;--mut:#9a9186;--ln:#38322a;--acc:#e08a6d;--soft:#2a251f}}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;padding-bottom:70px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding:36px 0 4px;text-align:center}
+h1{font-size:26px;letter-spacing:2px}
+.sub{color:var(--mut);font-size:13px;margin-top:6px;letter-spacing:.5px}
+section{margin-top:30px}
+h2{font-size:17px;padding:6px 0 8px;border-bottom:2px solid var(--ln);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+h2 .dot{width:10px;height:10px;border-radius:50%;background:var(--acc);flex:none}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px 18px;box-shadow:0 2px 10px rgba(60,40,20,.05)}
+/* 此刻关注 */
+.fc{text-align:center}
+#f-label{display:inline-block;font-size:12px;letter-spacing:2px;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:2px 14px;margin-bottom:10px}
+#f-name{font-size:19px;font-weight:600}
+#f-time{color:var(--mut);font-size:13px;margin-top:4px}
+#cd{font-size:46px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:1px;margin:12px 0 4px}
+#cd small{font-size:14px;font-weight:400;color:var(--mut);margin:0 10px 0 2px}
+#f-local{color:var(--mut);font-size:12px;margin-top:8px}
+/* 总览 */
+.mapcard{padding:10px}
+svg{color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:10px 6px 2px;font-size:12px;color:var(--mut)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+/* 已确认 */
+.bk{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--ln)}
+.bk:last-child{border:0}
+.bk .ico{font-size:22px;flex:none;width:34px;text-align:center;padding-top:2px}
+.bk h3{font-size:15px}
+.bk p{font-size:13px;color:var(--mut);margin-top:2px}
+.bk a{color:var(--acc);text-decoration:none;border-bottom:1px dotted var(--acc)}
+.bk b{color:var(--ink)}
+/* 逐日 */
+.dwrap{margin-top:14px}
+.dhd{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--ln);border-radius:12px;background:var(--card);flex-wrap:wrap}
+.dbar{width:5px;align-self:stretch;border-radius:3px;flex:none}
+.dno{font-weight:700;font-size:15px}
+.ddt{color:var(--mut);font-size:12.5px}
+.dsp{flex:1}
+.dstay{font-size:12px;color:var(--mut)}
+.btn{display:inline-block;padding:4px 12px;border:1px solid var(--ln);border-radius:999px;font-size:12.5px;color:var(--ink);text-decoration:none;background:var(--card);cursor:pointer;white-space:nowrap}
+.btn.map{color:var(--acc);border-color:var(--acc)}
+.dmap{display:none;padding:12px 4px 4px}
+.dmap.open{display:block}
+.dmap .navrow{padding:6px 8px 0}
+.tl{margin-top:10px;background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:6px 16px}
+.ti{display:flex;gap:12px;padding:9px 0;border-bottom:1px dashed var(--ln)}
+.ti:last-child{border:0}
+.tt{flex:0 0 96px;color:var(--mut);font-size:13.5px;font-variant-numeric:tabular-nums;padding-top:1px}
+.tt .tz{font-size:10px;display:block;opacity:.7}
+.tc{flex:1;font-size:14px}
+.tc a{color:var(--acc);text-decoration:none;border-bottom:1px dotted var(--acc)}
+.tc .note{color:var(--mut);font-size:12.5px;margin-top:2px}
+.chip{display:inline-block;font-size:11px;border-radius:8px;padding:0 8px;margin-left:6px;vertical-align:1px}
+.c-ok{background:rgba(90,150,70,.16);color:#4d8a3f}
+.c-bk{background:rgba(200,140,30,.16);color:#b07b1e}
+.c-hd{background:rgba(200,60,50,.14);color:#c04434}
+@media(prefers-color-scheme:dark){.c-ok{color:#8fc47f}.c-bk{color:#d9a94e}.c-hd{color:#e0776a}}
+/* 待办 */
+ol.todo{margin-left:22px}
+ol.todo li{margin:8px 0}
+ol.todo .em{color:var(--acc);font-weight:600}
+/* 贴士 */
+.tip{padding:9px 0;border-bottom:1px dashed var(--ln);font-size:14px}
+.tip:last-child{border:0}
+.tip b{color:var(--acc)}
+footer{margin-top:44px;text-align:center;color:var(--mut);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>京都 · 大阪 红叶季</h1>
+  <div class="sub">2026.11.16（一）— 11.22（日）｜ 4 人 ｜ 香港往返</div>
+</header>
+
+<section>
+  <h2><span class="dot"></span>此刻关注</h2>
+  <div class="card fc">
+    <div id="f-label">下一行程</div>
+    <div id="f-name">—</div>
+    <div id="f-time">—</div>
+    <div id="cd">—</div>
+    <div id="f-local">—</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>行程总览</h2>
+  <div class="card mapcard">
+  <svg viewBox="0 0 680 640" width="100%" role="img" aria-label="行程总览示意地图">
+    <ellipse cx="190" cy="320" rx="185" ry="215" fill="rgba(150,120,80,.06)" stroke="none"/>
+    <ellipse cx="480" cy="300" rx="115" ry="120" fill="rgba(80,110,160,.06)" stroke="none"/>
+    <text x="120" y="105" font-size="26" letter-spacing="8" fill="currentColor" opacity=".5">京 都</text>
+    <text x="435" y="180" font-size="20" letter-spacing="6" fill="currentColor" opacity=".5">大 阪</text>
+    <!-- Day1 航空接驳 -->
+    <path d="M562,552 C540,575 340,585 226,518" fill="none" stroke="#E8833A" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round" opacity=".85"/>
+    <!-- Day2 洛北环线 -->
+    <path d="M210,505 Q275,522 318,512 Q295,492 283,478 C255,410 258,235 262,160 Q248,198 235,225 Q205,232 185,225 Q168,390 210,505" fill="none" stroke="#D64545" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <!-- Day3 东山 -->
+    <path d="M262,405 Q250,382 247,362 Q205,342 172,330" fill="none" stroke="#A05EB5" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    <!-- Day4 岚山 -->
+    <path d="M210,505 Q145,428 95,345 Q75,330 60,330" fill="none" stroke="#2F8F83" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    <!-- Day5 高雄→大阪 -->
+    <path d="M75,185 Q140,330 210,505" fill="none" stroke="#6A994E" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <path d="M218,508 Q380,540 512,258" fill="none" stroke="#6A994E" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <!-- Day6 大阪环线 -->
+    <path d="M505,258 L490,292 Q468,330 462,372 Q432,330 440,295 Q468,262 505,258" fill="none" stroke="#3D6FB4" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    <!-- Day7 返程 -->
+    <path d="M512,262 Q560,430 562,552" fill="none" stroke="#B0713F" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round" opacity=".85"/>
+    <!-- 景点 -->
+    <g font-size="11" fill="currentColor">
+      <circle cx="75" cy="185" r="4" fill="#6A994E"/><text x="86" y="180">高雄三尾</text>
+      <circle cx="95" cy="345" r="4" fill="#2F8F83"/><text x="106" y="342">岚山·龟冈</text>
+      <circle cx="185" cy="225" r="4" fill="#D64545"/><text x="120" y="222">金阁寺</text>
+      <circle cx="262" cy="160" r="4" fill="#D64545"/><text x="272" y="158">下鸭神社·出町柳</text>
+      <circle cx="235" cy="225" r="3" fill="#D64545" opacity=".6"/><text x="243" y="230">京都御苑</text>
+      <circle cx="210" cy="505" r="4" fill="currentColor"/><text x="150" y="528">京都站</text>
+      <circle cx="283" cy="478" r="4" fill="#D64545"/><text x="293" y="478">东福寺</text>
+      <circle cx="318" cy="512" r="4" fill="#D64545"/><text x="328" y="516">伏见稻荷</text>
+      <circle cx="262" cy="405" r="4" fill="#A05EB5"/><text x="272" y="402">清水寺</text>
+      <circle cx="247" cy="362" r="4" fill="#A05EB5"/><text x="256" y="358">祇园·圆山</text>
+      <circle cx="172" cy="330" r="4" fill="#A05EB5"/><text x="105" y="322">永观堂</text>
+      <circle cx="440" cy="295" r="4" fill="#3D6FB4"/><text x="395" y="312">梅田</text>
+      <circle cx="490" cy="292" r="4" fill="#3D6FB4"/><text x="498" y="296">大阪城</text>
+      <circle cx="462" cy="372" r="4" fill="#3D6FB4"/><text x="400" y="388">心斋桥·难波</text>
+      <circle cx="562" cy="555" r="5" fill="currentColor"/><text x="530" y="578">关西机场</text>
+    </g>
+    <!-- 酒店 -->
+    <g font-size="11" font-weight="bold" fill="currentColor">
+      <path d="M218,506 l3.2,6.5 7.2,1 -5.2,5 1.2,7.1 -6.4,-3.4 -6.4,3.4 1.2,-7.1 -5.2,-5 7.2,-1 z" fill="#E8A33A"/>
+      <text x="230" y="522" font-weight="normal">Ala Hotel（11.16–20）</text>
+      <path d="M515,246 l3.2,6.5 7.2,1 -5.2,5 1.2,7.1 -6.4,-3.4 -6.4,3.4 1.2,-7.1 -5.2,-5 7.2,-1 z" fill="#E8A33A"/>
+      <text x="527" y="262" font-weight="normal">天满桥京阪（11.20–22）</text>
+    </g>
+  </svg>
+  <div class="legend">
+    <span><i style="background:#E8833A"></i>Day1 抵达</span>
+    <span><i style="background:#D64545"></i>Day2 洛北</span>
+    <span><i style="background:#A05EB5"></i>Day3 东山和服</span>
+    <span><i style="background:#2F8F83"></i>Day4 岚山环线</span>
+    <span><i style="background:#6A994E"></i>Day5 高雄→大阪</span>
+    <span><i style="background:#3D6FB4"></i>Day6 大阪</span>
+    <span><i style="background:#B0713F"></i>Day7 返港</span>
+  </div>
+  </div>
+  <p class="note" style="color:var(--mut);font-size:12px;margin-top:6px">示意地图，非精确比例。日本时间 = UTC+9（比香港快 1 小时）。</p>
+</section>
+
+<section>
+  <h2><span class="dot"></span>已确认预订</h2>
+  <div class="card">
+    <div class="bk"><div class="ico">✈️</div><div>
+      <h3>UO898 香港快运 ｜ 11.16（一）</h3>
+      <p><b>香港 T2 11:50 <span style="font-size:11px">UTC+8</span> → 关西机场 T1 16:25 <span style="font-size:11px">UTC+9</span></b></p>
+      <p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%A6%99%E6%B8%AF%E5%9B%BD%E9%99%85%E6%9C%BA%E5%9C%BAT2">香港国际机场 T2</a> · <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%96%A2%E8%A5%BF%E5%9B%BD%E9%9A%9B%E7%A9%BA%E6%B8%AF">关西国际机场 T1</a></p>
+    </div></div>
+    <div class="bk"><div class="ico">✈️</div><div>
+      <h3>UO899 香港快运 ｜ 11.22（日）</h3>
+      <p><b>关西机场 T1 17:20 <span style="font-size:11px">UTC+9</span> → 香港 T1 21:00 <span style="font-size:11px">UTC+8</span></b> · 建议提前 3.5 小时到机场（含退税时间）</p>
+    </div></div>
+    <div class="bk"><div class="ico">🏨</div><div>
+      <h3>Ala Hotel 京都（京都阿拉酒店）｜ 11.16–11.20 · 4 晚</h3>
+      <p>禁烟塔景双床房 ×2（每间限住 2 人）｜ 入住 15:00–24:00（非 24 小时前台，晚到 24:00 前须抵达）｜ 无餐食 ｜ 已预付</p>
+      <p>下京区（京都站步行约 8 分钟）｜ <a href="tel:+81753710007">+81-75-371-0007</a> ｜ <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ala%20Hotel%20Kyoto">Google 地图</a></p>
+    </div></div>
+    <div class="bk"><div class="ico">🏨</div><div>
+      <h3>Hotel Keihan Temmabashi Ekimae（京阪天满桥站前）｜ 11.20–11.22 · 2 晚</h3>
+      <p>禁烟双人间 ×2 ｜ 入住 15:00–次日 02:00 ｜ 无餐食 ｜ 已预付</p>
+      <p>大阪市中央区天满桥京町 2-13 ｜ <a href="tel:+81669460321">+81-6-6946-0321</a> ｜ <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hotel%20Keihan%20Temmabashi%20Ekimae">Google 地图</a></p>
+    </div></div>
+    <div class="bk"><div class="ico">🛶</div><div>
+      <h3>保津川漂流 ｜ 11.19（四）11:00 × 4 成人</h3>
+      <p>龟冈乘船场 → 渡月桥畔，约 2 小时 ｜ 电子票当日有效 ｜ <b>已订</b>（¥6,000/成人口径）</p>
+      <p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%BF%9D%E6%B4%A5%E5%B7%9D%E4%B8%8B%E3%82%8A%E4%BA%80%E5%B2%A1%E4%B9%97%E8%88%B9%E5%A0%B4">乘船场位置</a></p>
+    </div></div>
+    <div class="bk"><div class="ico">👘</div><div>
+      <h3>和服租赁 MOCOMOCO 清水寺店（本店）｜ 11.18（三）08:45 × 4 人</h3>
+      <p>情侣计划 ¥4,990 × 2 组（含女士发型）+ 2 位女士加购化妆 ¥5,500 × 2，<b>到店付款约 ¥21,000</b> ｜ 下午于八坂神社祇园店免费跨店归还 ｜ <b>已预约</b></p>
+      <p>⚠️ 迟到 20 分钟以上须立即经 Instagram DM 或邮件联系店铺 ｜ <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=MOCOMOCO%20%E6%B8%85%E6%B0%B4%E5%AF%BA%E5%BA%97">Google 地图</a></p>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>逐日行程</h2>
+  <div id="days"></div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>待办清单</h2>
+  <div class="card">
+  <ol class="todo">
+    <li><span class="em">10.19（周一）日本时间 10:00</span>：岚山小火车开售，准时抢 11.19 唯一班次 09:02 嵯峨野 1 号（平台 + JR 西日本 e5489 双通道；红叶季极快售罄，建议设闹钟）</li>
+    <li>预订 あぶりや 阪急梅田店（11.21 周六 19:00 · 4 人 · 放题全员同课程）——<span class="em">优先</span>，周末爆满</li>
+    <li>预订 富之上 祇园本店（11.18 周三 20:00 · 和牛寿喜烧）</li>
+    <li>预订 高雄茶屋（11.20 周五 13:00）</li>
+    <li>预订 釜座 二年坂（11.18 周三 12:30）</li>
+    <li>预订 八起庵 京都高岛屋店（11.17 周二 18:00）</li>
+    <li>预订 延屋 难波 3 号店（11.20 周五 18:30）</li>
+    <li>なぎかつ（11.21 周六）：尝试预约，或 12:00 前到店排队</li>
+    <li>出发前 2 周：查永观堂 2026 年夜间点灯日期（需覆盖 11.18 晚，通常 17:30–21:00）</li>
+    <li>Visit Japan Web 注册：入境审查 + 海关申报 + 机场退税，QR 码截图保存</li>
+    <li>购买 eSIM / 电话卡，落地即有网</li>
+    <li>iPhone 在 Apple 钱包开通 Suica 并充值；安卓海外机落地买实体卡</li>
+    <li>旅游保险：确认保单覆盖保津川漂流（划船类活动部分保单免责）</li>
+    <li>兑换现金：4 人合计约 ¥40,000–50,000（六重亭仅收现金、山区小店、巴士零头）</li>
+    <li>行装：保暖外套 / 围巾 / 暖宝宝（清晨 5–10°C、漂流江风大）、防滑步行鞋、轻便雨衣</li>
+    <li>（可选）梅田空中庭园观景台线上预购，免排队（¥1,500）</li>
+    <li>出发前 1 周：看京都红叶预报——若提前满开，Day 2 当场购买东福寺通天桥联票 ¥1,000</li>
+  </ol>
+  </div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>实用贴士</h2>
+  <div class="card">
+    <div class="tip"><b>时差</b>：日本 UTC+9，比香港快 1 小时。本页所有时间均标注时区，倒计时按绝对时间计算，任何地区打开都不会算错。</div>
+    <div class="tip"><b>11 月穿衣</b>：京都清晨 5–10°C、白天 12–16°C。洋葱式穿搭 + 围巾 + 暖宝宝；保津川漂流江风大，备防风外套与轻便雨衣；和服日可向店铺要求平底鞋。</div>
+    <div class="tip"><b>现金</b>：六重亭（Day 4 午餐）仅收现金；高雄山区小店、部分巴士与小食摊也偏现金。信用卡与 Suica 覆盖大部分场景。</div>
+    <div class="tip"><b>免税新政（2026.11.1 起）</b>：购物一律付含税价；同店同日满 ¥5,000（税前）可退，<b>按小票为单位</b>（同张小票丢一件整单不退）；商品保持未使用；离境时<b>必须在托运行李前</b>，于出发大厅用自助终端或 Visit Japan Web 完成海关确认（关西机场支持），绿=完成、红=开箱查验。</div>
+    <div class="tip"><b>当天硬截止</b>：金阁寺 16:30 停止受付（Day 2）｜ 和服归还 17:30（Day 3）｜ 永观堂夜场 20:30 停止入场（Day 3）｜ 大河内山庄 16:00 停止入园（Day 4）｜ 高雄回程巴士 14:15（Day 5，班距约 30 分钟）。</div>
+    <div class="tip"><b>HARUKA 优惠票</b>（Day 1）：关西机场售票处凭护照购买，¥1,800/人（原价 ¥3,110）。赶不上 17:46 班次就乘 18:16，行程不受影响。</div>
+    <div class="tip"><b>红叶时序</b>：11 月中旬为高峰前段——高雄（11.20）恰逢最佳；永观堂夜枫、岚山次之；东福寺若未满开，免费区同样值得一看。</div>
+    <div class="tip"><b>雨天备案</b>：小火车与漂流雨天照常（漂流船有挡板）；若 Day 3 大雨，和服日可与 Day 5 对调（MOCOMOCO 可免费改期）。</div>
+    <div class="tip"><b>应急</b>：日本报警 110、急救火警 119；外交部全球领事保护热线 +86-10-12308。地图按钮需要能访问 Google 服务的网络。</div>
+  </div>
+</section>
+
+<footer>页面即行程终稿 · 时间为当地时间并标注时区 · 仅供同行人参考</footer>
+</div>
+
+<script>
+(function(){
+var P=encodeURIComponent;
+var TZ={8:'UTC+8',9:'UTC+9'};
+var DAYS=[
+{n:'Day 1',d:'11.16 周一',t:'抵达京都 · 倒时差',c:'#E8833A',stay:'宿 Ala Hotel 京都',
+ nav:{m:'transit',p:['関西国際空港','京都駅','アラ ホテル 京都']},
+ items:[
+ {t:'11:50',off:8,s:[11,50],e:[16,25],eo:9,txt:'<b>UO898 起飞</b> · 香港国际机场 T2（香港快运）',chip:['ok','已出票']},
+ {t:'16:25',off:9,s:[16,25],e:[17,10],txt:'抵达<b>关西国际机场 T1</b>，入境审查（Visit Japan Web QR）+ 提取行李',loc:'関西国際空港'},
+ {t:'17:10–17:40',s:[17,10],e:[17,45],txt:'机场售票处<b>凭护照购买 HARUKA 优惠票</b> ¥1,800/人（原价 ¥3,110）',loc:'JR関西空港駅',note:'赶不上 17:46 就乘 18:16 班次，晚餐不受影响'},
+ {t:'17:46–19:04',s:[17,46],e:[19,4],txt:'HARUKA 特急 → 京都站（约 1 小时 18 分）'},
+ {t:'19:15–19:45',s:[19,15],e:[19,45],txt:'步行 600 米至酒店，办理入住（前台至 24:00）',loc:'アラ ホテル 京都'},
+ {t:'20:00–21:00',s:[20,0],e:[21,0],txt:'晚餐：<b>炭烧野菜与烤鸟 辻屋</b>（酒店旁，无需预订）'},
+ {t:'21:30',s:[21,30],e:[23,59],txt:'回酒店休息倒时差，早睡'}
+]},
+{n:'Day 2',d:'11.17 周二',t:'清晨稻荷 + 洛北三连',c:'#D64545',stay:'宿 Ala Hotel 京都',
+ nav:{m:'transit',p:['京都駅','伏見稲荷大社','東福寺','出町柳','下鴨神社','京都御苑','鹿苑寺 金閣寺']},
+ items:[
+ {t:'06:50',s:[6,50],e:[7,5],txt:'酒店出发，步行至京都站'},
+ {t:'07:05–07:15',s:[7,5],e:[7,15],txt:'JR 奈良线 ¥150 → 稻荷站（仅 2 站）'},
+ {t:'07:15–09:15',s:[7,15],e:[9,15],txt:'<b>伏见稻荷大社</b>：清晨千本鸟居近乎包场，登至四辻观景台折返',loc:'伏見稲荷大社',note:'8:30 后旅行团抵达，务必赶早'},
+ {t:'09:15–09:35',s:[9,15],e:[9,35],txt:'步行或 JR 一站至东福寺'},
+ {t:'09:35–10:40',s:[9,35],e:[10,40],txt:'<b>东福寺</b>：红叶热身，只走免费区域',loc:'東福寺',note:'通天桥联票 ¥1,000 视红叶进度当场决定'},
+ {t:'10:45–11:00',s:[10,45],e:[11,0],txt:'京阪本线 ¥220 → 出町柳'},
+ {t:'11:00–12:00',s:[11,0],e:[12,0],txt:'午餐：<b>Omura House 出町柳店</b>（招牌牛肉蛋包饭，无需预订）',loc:'出町柳'},
+ {t:'12:00–12:45',s:[12,0],e:[12,45],txt:'鸭川三角洲 + 河合神社（镜池祈愿）',loc:'鴨川デルタ'},
+ {t:'12:45–13:45',s:[12,45],e:[13,45],txt:'<b>下鸭神社 + 糺之森</b>：静谧林荫道',loc:'下鴨神社'},
+ {t:'13:45–14:45',s:[13,45],e:[14,45],txt:'京都御苑散步（<b>弹性项</b>：爸妈累了可删，从下鸭直接打车去金阁寺约 ¥2,000–2,500）',loc:'京都御苑'},
+ {t:'14:50–15:30',s:[14,50],e:[15,30],txt:'巴士 204/205 → 金阁寺道（约 40 分钟）'},
+ {t:'15:30–16:40',s:[15,30],e:[16,40],txt:'<b>金阁寺</b> ¥500',loc:'鹿苑寺 金閣寺',chip:['hd','16:30 停止受付'],note:'务必 16:00 前入内'},
+ {t:'17:00–17:40',s:[17,0],e:[17,40],txt:'巴士返回京都站（减负可选出租车约 ¥2,000）'},
+ {t:'18:00–19:30',s:[18,0],e:[19,30],txt:'晚餐：<b>八起庵</b> 京都高岛屋店',loc:'京都高島屋',chip:['bk','需预订']},
+ {t:'20:00',s:[20,0],e:[22,0],txt:'回酒店'}
+]},
+{n:'Day 3',d:'11.18 周三',t:'东山和服日',c:'#A05EB5',stay:'宿 Ala Hotel 京都',
+ nav:{m:'walking',p:['アラ ホテル 京都','八坂の塔','% Arabica 京都 東山','MOCOMOCO 清水寺店','清水寺','高台寺','円山公園','祇園 花見小路','永観堂 禅林寺','祇園四条駅']},
+ items:[
+ {t:'06:05',s:[6,5],e:[6,20],txt:'打车约 15 分钟直达清水坂（¥1,500–1,800，普通出租车可乘 4 人）',note:'减负：爸妈可跳过清晨拍摄，07:45 在 % Arabica 汇合'},
+ {t:'06:20–07:55',s:[6,20],e:[7,55],txt:'⭐ <b>二三年坂空景拍摄</b>（日出约 6:35）：三年坂石阶 → 二年坂 → 八坂塔经典机位 → 宁宁之道/石塀小路',loc:'八坂の塔',note:'8:30 后旅行团抵达，8:00 前收工'},
+ {t:'08:00–08:30',s:[8,0],e:[8,30],txt:'早餐：<b>% Arabica 京都东山</b>（8:00 开门，八坂塔脚下）',loc:'% Arabica 京都 東山'},
+ {t:'08:30–08:40',s:[8,30],e:[8,45],txt:'步行至 MOCOMOCO 清水寺店（本店）'},
+ {t:'08:45–10:30',s:[8,45],e:[10,30],txt:'<b>着装 + 发型 + 化妆</b>：情侣计划 ¥4,990×2 + 化妆 ¥5,500×2，到店付款约 ¥21,000',chip:['ok','已预约'],note:'男士约 10:15 完毕先歇；迟到 20 分钟以上须 IG DM / 邮件联系店铺'},
+ {t:'10:30–11:45',s:[10,30],e:[11,45],txt:'<b>清水寺</b> ¥400，含音羽瀑布三道祈水',loc:'清水寺'},
+ {t:'11:45–12:30',s:[11,45],e:[12,30],txt:'二年坂 → 三年坂 → 宁宁之道：以人像为主（空景已拍），节奏加快',loc:'二年坂・三年坂'},
+ {t:'12:30–13:30',s:[12,30],e:[13,30],txt:'午餐：<b>釜座</b>（汤叶/豆腐料理，古町屋内）',loc:'二年坂',chip:['bk','需预订']},
+ {t:'13:45–14:35',s:[13,45],e:[14,35],txt:'<b>高台寺</b> ¥600：庭园苔藓与红叶',loc:'高台寺'},
+ {t:'14:45–15:45',s:[14,45],e:[15,45],txt:'<b>菊乃井 无碍山房</b>下午茶歇脚（爸妈可多歇）',loc:'無碍山房'},
+ {t:'15:45–16:55',s:[15,45],e:[16,55],txt:'圆山公园 → 八坂神社 → 花见小路 + 巽桥白川',loc:'八坂神社',note:'留意 17:00 折返还和服，勿走远'},
+ {t:'17:00–17:15',s:[17,0],e:[17,15],txt:'<b>MOCOMOCO 祇园店归还和服</b>（免费跨店归还）',loc:'MOCOMOCO 八坂神社祇園店',chip:['hd','17:30 截止']},
+ {t:'17:20–17:50',s:[17,20],e:[17,50],txt:'打车或巴士至永观堂（约 15–20 分钟）'},
+ {t:'18:15–19:30',s:[18,15],e:[19,30],txt:'⭐ <b>永观堂 夜间点灯</b>：京都红叶季天花板（约 ¥1,000）',loc:'永観堂 禅林寺',chip:['hd','20:30 停止入场'],note:'点灯日期出发前于官网确认（待办）'},
+ {t:'20:00–21:30',s:[20,0],e:[21,30],txt:'晚餐：<b>富之上 祇园本店</b>（和牛寿喜烧，永观堂打车回祇园约 15 分钟）',loc:'祇園',chip:['bk','需预订']},
+ {t:'22:00',s:[22,0],e:[23,30],txt:'返回 Ala Hotel 京都',note:'体力不支可从永观堂直接打车回酒店'}
+]},
+{n:'Day 4',d:'11.19 周四',t:'岚山小火车 × 保津川环线',c:'#2F8F83',stay:'宿 Ala Hotel 京都',
+ nav:{m:'transit',p:['トロッコ嵯峨駅','トロッコ亀岡駅','保津川下り 亀岡乗船場','渡月橋','天龍寺 曹源池庭園','竹林の小道','大河内山荘庭園','野宮神社','JR嵯峨嵐山駅']},
+ items:[
+ {t:'08:00',s:[8,0],e:[8,20],txt:'JR 嵯峨野线快速 → 嵯峨岚山站（16 分钟 ¥240）'},
+ {t:'08:20–09:00',s:[8,20],e:[9,0],txt:'小火车嵯峨站取票候车（首班 09:02 发车）',loc:'トロッコ嵯峨駅',chip:['bk','10.19 开售抢票']},
+ {t:'09:02–09:28',s:[9,2],e:[9,28],txt:'<b>嵯峨野 1 号首班</b>：保津峡红叶峡谷段（¥880；5 号「富贵号」为开放式车厢）',note:'错失车票可在 JR 西日本 e5489 或车站绿色窗口补位'},
+ {t:'09:30–10:20',s:[9,30],e:[10,20],txt:'龟冈站步行至漂流乘船场（约 15–20 分钟）',loc:'保津川下り 亀岡乗船場'},
+ {t:'10:30–10:50',s:[10,30],e:[10,50],txt:'乘船场办理登船手续'},
+ {t:'11:00–13:00',s:[11,0],e:[13,0],txt:'🛶 <b>保津川漂流</b>：传统木船顺流约 2 小时，船夫撑篙 + 两岸红叶',chip:['ok','已订 11:00 场'],note:'江风大，备保暖外套与轻便雨衣'},
+ {t:'13:00–13:15',s:[13,0],e:[13,15],txt:'上岸步行至<b>渡月桥</b>，桥畔合影',loc:'渡月橋'},
+ {t:'13:15–14:15',s:[13,15],e:[14,15],txt:'午餐：<b>岚山六重亭</b>（和牛 + 京豆腐）',loc:'嵐山 六重亭',chip:['bk','无预约·仅收现金'],note:'人均 ¥2,000–4,000，现场排队'},
+ {t:'14:30–15:15',s:[14,30],e:[15,15],txt:'<b>天龙寺</b> 曹源池庭园：世界遗产借景岚山（压缩至 45 分钟）',loc:'天龍寺'},
+ {t:'15:15–15:35',s:[15,15],e:[15,35],txt:'<b>竹林小径</b>：竹影光廊缓行',loc:'竹林の小道'},
+ {t:'15:40–17:00',s:[15,40],e:[17,0],txt:'<b>大河内山庄</b>：文豪庭园，含抹茶 + 和果子（约 ¥1,000）',loc:'大河内山荘庭園',chip:['hd','16:00 停止入园']},
+ {t:'17:05–17:20',s:[17,5],e:[17,20],txt:'<b>野宫神社</b>：黑木鸟居，缘结祈愿',loc:'野宮神社'},
+ {t:'17:30–17:50',s:[17,30],e:[17,50],txt:'步行至 JR 嵯峨岚山站，乘车回京都站（约 17 分钟）'},
+ {t:'18:30–19:30',s:[18,30],e:[19,30],txt:'晚餐：<b>面屋猪一 离</b>（高峰排队 20–40 分钟；想先回酒店休整可 19:30 后再出门）',loc:'製麺処 猪一'},
+ {t:'20:30',s:[20,30],e:[22,0],txt:'返回 Ala Hotel 京都休息'}
+]},
+{n:'Day 5',d:'11.20 周五',t:'高雄三尾 → 迁往大阪',c:'#6A994E',stay:'宿 天满桥京阪',
+ nav:{m:'transit',p:['JR京都駅','高山寺','西明寺','神護寺','アラ ホテル 京都','ホテル京阪 天満橋駅前']},
+ items:[
+ {t:'07:45',s:[7,45],e:[8,0],txt:'退房，<b>大件行李寄存 Ala Hotel 前台</b>（免费），轻装上高雄'},
+ {t:'08:00–09:00',s:[8,0],e:[9,0],txt:'京都站前乘<b>市巴士 8 号</b>直达高雄（约 1 小时，班距约 30 分钟，出发前查好时刻）',loc:'京都駅'},
+ {t:'09:10–10:10',s:[9,10],e:[10,10],txt:'<b>高山寺</b> 石水院 ¥600：世界遗产、《鸟兽戏画》诞生地',loc:'高山寺'},
+ {t:'10:10–10:30',s:[10,10],e:[10,30],txt:'步行 20 分钟至西明寺'},
+ {t:'10:30–11:00',s:[10,30],e:[11,0],txt:'<b>西明寺</b> ¥500：小巧幽静，红叶隧道',loc:'西明寺'},
+ {t:'11:00–11:15',s:[11,0],e:[11,15],txt:'步行约 15 分钟至神护寺'},
+ {t:'11:15–12:45',s:[11,15],e:[12,45],txt:'<b>神护寺</b> ¥600：约 100 级石阶直上金堂，高雄红叶的绝对主角',loc:'神護寺',note:'石阶湿滑，穿防滑鞋'},
+ {t:'13:00–14:00',s:[13,0],e:[14,0],txt:'午餐：<b>高雄茶屋</b>（千年汤豆腐，川畔茅草屋）',loc:'高雄茶屋',chip:['bk','需预订']},
+ {t:'13:45–15:15',s:[13,45],e:[15,15],txt:'提前候车，乘 <b>14:15 巴士</b>返回京都站（约 1 小时）',chip:['hd','全天唯一硬节点'],note:'兜底：4 人打车回京都站约 ¥4,000–5,000、25 分钟'},
+ {t:'15:20–15:50',s:[15,20],e:[15,50],txt:'步行至 Ala Hotel 取寄存行李，稍作休整'},
+ {t:'16:05–16:40',s:[16,5],e:[16,40],txt:'京都站乘 <b>JR 京都线新快速</b> → 大阪（约 30 分钟）'},
+ {t:'16:50–17:15',s:[16,50],e:[17,15],txt:'地铁谷町线 东梅田 → 天满桥'},
+ {t:'17:15–18:00',s:[17,15],e:[18,0],txt:'<b>京阪天满桥站前酒店</b>入住、放行李（前台 15:00 起）',loc:'ホテル京阪 天満橋駅前'},
+ {t:'18:30–20:00',s:[18,30],e:[20,0],txt:'晚餐：<b>炭火烧鸟 延屋</b> 难波 3 号店（串烧 + 冰啤酒）',loc:'なんば',chip:['bk','需预订']},
+ {t:'21:00',s:[21,0],e:[22,0],txt:'回酒店'}
+]},
+{n:'Day 6',d:'11.21 周六',t:'大阪市区一日（不买周游卡）',c:'#3D6FB4',stay:'宿 天满桥京阪',
+ nav:{m:'transit',p:['ホテル京阪 天満橋駅前','中之島公園','大阪城公園','とんかつ なぎかつ','心斎橋筋商店街','大丸心斎橋店','道頓堀','梅田スカイビル 空中庭園','ホテル京阪 天満橋駅前']},
+ items:[
+ {t:'08:00–08:40',s:[8,0],e:[8,40],txt:'<b>中之岛公园</b>晨间散步：玫瑰园 + 河畔，清晨人少（酒店步行 10 分钟）',loc:'中之島公園'},
+ {t:'08:45–09:45',s:[8,45],e:[9,45],txt:'早餐：<b>Kako to Ima</b>（就在中之岛上，顺路进店，无需预订）'},
+ {t:'10:15–11:30',s:[10,15],e:[11,30],txt:'<b>大阪城公园</b>（免费区域）：护城河、石垣、天守阁外观合影——不登阁、不进收费庭园',loc:'大阪城公園'},
+ {t:'11:30–11:50',s:[11,30],e:[11,50],txt:'地铁 谷町四丁目 → 心斋桥（约 20 分钟）'},
+ {t:'12:00–13:00',s:[12,0],e:[13,0],txt:'午餐：<b>とんかつ なぎかつ</b> 炸猪排（11:00 营业，周六热门，提前到店）',loc:'とんかつ なぎかつ',chip:['bk','建议预约']},
+ {t:'13:00–14:45',s:[13,0],e:[14,45],txt:'<b>心斋桥筋商店街</b>：药妆、服饰，从南端一路向北单向逛',loc:'心斎橋筋商店街',note:'周六 14:00 后人流渐增'},
+ {t:'14:45–15:45',s:[14,45],e:[15,45],txt:'<b>大丸心斋桥店</b>：伴手礼一次买齐（直接上食品馆楼层；付含税价、保留小票，离境退税用）',loc:'大丸心斎橋店'},
+ {t:'15:45–16:00',s:[15,45],e:[16,0],txt:'顺路穿行<b>道顿堀</b>：格力高打卡（白天档）',loc:'道頓堀'},
+ {t:'16:10–16:30',s:[16,10],e:[16,30],txt:'御堂筋线 难波 → 梅田（¥190）'},
+ {t:'16:30–18:00',s:[16,30],e:[18,0],txt:'⭐ <b>梅田蓝天大厦 空中庭园</b>：16:30 登顶，日落约 16:50，橘→蓝调→夜景一次看全（¥1,500，建议线上预购）',loc:'梅田スカイビル 空中庭園'},
+ {t:'18:15–19:00',s:[18,15],e:[19,0],txt:'<b>友都八喜 梅田</b>：电器、动漫、伴手礼补货（10:00–22:00）',loc:'ヨドバシカメラ 梅田'},
+ {t:'19:00–21:00',s:[19,0],e:[21,0],txt:'晚餐：<b>あぶりや 阪急梅田店</b> 国产牛烤肉放题（限时约 120 分钟，注意最后点单时间）',loc:'あぶりや 阪急梅田店',chip:['bk','需预订']},
+ {t:'21:15–21:30',s:[21,15],e:[21,30],txt:'谷町线 东梅田 → 天满桥（约 10 分钟），回酒店'}
+]},
+{n:'Day 7',d:'11.22 周日',t:'轻装返港',c:'#B0713F',stay:'返程香港',
+ nav:{m:'transit',p:['ホテル京阪 天満橋駅前','なんば','関西国際空港']},
+ items:[
+ {t:'08:30–09:30',s:[8,30],e:[9,30],txt:'酒店早餐，整理行李退房'},
+ {t:'09:30–10:45',s:[9,30],e:[10,45],txt:'自由晨间：北浜 / 土佐堀川畔散步，或酒店周边咖啡店',loc:'北浜'},
+ {t:'11:00–11:20',s:[11,0],e:[11,20],txt:'京阪本线 天满桥 → 淀屋桥（3 分钟）→ 御堂筋线 → 难波（2 站）'},
+ {t:'11:30–12:10',s:[11,30],e:[12,10],txt:'难波午餐（轻食为主，避开正餐高峰）',loc:'なんば'},
+ {t:'12:20–13:05',s:[12,20],e:[13,5],txt:'南海电铁 <b>空港急行</b> → 关西机场（约 45 分钟 ¥920；或 Rapi:t 特急约 38 分钟）'},
+ {t:'13:15–14:15',s:[13,15],e:[14,15],txt:'⚠️ <b>机场退税</b>：<b>托运行李前</b>在出发大厅用 Visit Japan Web / 自助终端办理（满 ¥5,000/店起退、按小票、商品勿使用）',loc:'関西国際空港',chip:['hd','先退税再托运']},
+ {t:'14:15–15:20',s:[14,15],e:[15,20],txt:'办理 UO899 值机、托运、安检'},
+ {t:'15:20–16:50',s:[15,20],e:[16,50],txt:'免税店、登机口候机'},
+ {t:'17:20',off:9,s:[17,20],e:[21,0],eo:8,txt:'<b>UO899 起飞</b> · 关西机场 T1',chip:['ok','已出票']},
+ {t:'21:00',off:8,s:[21,0],e:[21,30],txt:'抵达香港国际机场，行程结束 🎉'}
+]}
+];
+
+// ---------- 渲染逐日 ----------
+function mapsSearch(q){return 'https://www.google.com/maps/search/?api=1&query='+P(q);}
+function navURL(d){
+ var a=d.nav.p;var u='https://www.google.com/maps/dir/?api=1&origin='+P(a[0])+'&destination='+P(a[a.length-1]);
+ if(a.length>2){u+='&waypoints='+a.slice(1,-1).map(P).join('%7C');}
+ return u+'&travelmode='+d.nav.m;
+}
+function routeSVG(d){
+ var s=d.nav.p,rowH=38,h=s.length*rowH+18,w=300;
+ var pts=[],out='';
+ for(var i=0;i<s.length;i++){var x=30+(i%2?0:0)+Math.round(Math.sin(i*1.7)*5);var y=20+i*rowH;pts.push(x+','+y);
+  out+='<circle cx="'+x+'" cy="'+y+'" r="5" fill="'+d.c+'"/><text x="'+(x+16)+'" y="'+(y+4)+'" font-size="12" fill="currentColor">'+s[i]+'</text>';}
+ var path='M'+pts.join(' L');
+ return '<svg viewBox="0 0 '+w+' '+h+'" width="100%"><path d="'+path+'" fill="none" stroke="'+d.c+'" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>'+out+'</svg>';
+}
+function chipHTML(c){
+ if(!c)return '';
+ var cls=c[0]==='ok'?'c-ok':(c[0]==='bk'?'c-bk':'c-hd');
+ return '<span class="chip '+cls+'">'+c[1]+'</span>';
+}
+var root=document.getElementById('days'),html='';
+DAYS.forEach(function(d,di){
+ html+='<div class="dwrap">';
+ html+='<div class="dhd"><span class="dbar" style="background:'+d.c+'"></span><span><span class="dno">'+d.n+'</span> <span class="ddt">'+d.d+' · '+d.t+'</span></span><span class="dsp"></span><span class="dstay">'+d.stay+'</span>';
+ html+='<button class="btn" data-d="'+di+'">路线 ▾</button><a class="btn map" target="_blank" rel="noopener" href="'+navURL(d)+'">🗺 全天导航</a></div>';
+ html+='<div class="dmap" id="dm'+di+'">'+routeSVG(d)+'<div class="navrow"><a class="btn map" target="_blank" rel="noopener" href="'+navURL(d)+'">🗺 打开全天多点导航（Google 地图）</a></div></div>';
+ html+='<div class="tl">';
+ d.items.forEach(function(it){
+  var tz=it.off?(it.off===8?'UTC+8':'UTC+9'):'UTC+9';
+  html+='<div class="ti"><div class="tt">'+it.t+'<span class="tz">'+tz+'</span></div><div class="tc">'+it.txt+chipHTML(it.chip);
+  if(it.loc)html+=' <a target="_blank" rel="noopener" href="'+mapsSearch(it.loc)+'">📍地图</a>';
+  if(it.note)html+='<div class="note">'+it.note+'</div>';
+  html+='</div></div>';
+ });
+ html+='</div></div>';
+});
+root.innerHTML=html;
+// 展开当日路线
+root.addEventListener('click',function(e){
+ if(e.target.dataset&&e.target.dataset.d!==undefined){
+  document.getElementById('dm'+e.target.dataset.d).classList.toggle('open');
+ }
+});
+
+// ---------- 此刻关注（倒计时） ----------
+function abs(di,h,m,off){return Date.UTC(2026,10,16+di,h-off,m);}
+var EV=[];
+DAYS.forEach(function(d,di){
+ d.items.forEach(function(it){
+  if(!it.s)return;
+  var so=it.off||9,eo=it.eo||it.off||9;
+  var st=abs(di,it.s[0],it.s[1],so);
+  var en=it.e?abs(di,it.e[0],it.e[1],eo):st+30*60000;
+  EV.push({st:st,en:en,name:it.txt.replace(/<[^>]*>/g,'').replace('⚠️ ',''),di:di,d:d});
+ });
+});
+EV.sort(function(a,b){return a.st-b.st;});
+function pad(n){return (n<10?'0':'')+n;}
+function fmt(ms){
+ var s=Math.max(0,Math.floor(ms/1000));var d=Math.floor(s/86400);s-=d*86400;var h=Math.floor(s/3600);s-=h*3600;var m=Math.floor(s/60);s-=m*60;
+ return '<span>'+d+'</span><small>天</small>'+pad(h)+'<small>时</small>'+pad(m)+'<small>分</small>'+pad(s)+'<small>秒</small>';
+}
+function tick(){
+ var now=Date.now(),cur=null,nxt=null;
+ for(var i=0;i<EV.length;i++){
+  if(EV[i].st<=now&&now<EV[i].en){cur=EV[i];break;}
+ }
+ if(!cur){for(var j=0;j<EV.length;j++){if(EV[j].st>now){nxt=EV[j];break;}}}
+ var el1=document.getElementById('f-label'),el2=document.getElementById('f-name'),el3=document.getElementById('f-time'),el4=document.getElementById('cd');
+ if(cur){
+  el1.textContent='进行中';el2.innerHTML=cur.name;
+  el3.textContent=DAYS[cur.di].d+' · 当地时间进行中';
+  el4.innerHTML=fmt(cur.en-now);
+ }else if(nxt){
+  el1.textContent='下一行程';el2.innerHTML=nxt.name;
+  el3.textContent=DAYS[nxt.di].d+' · 日本时间 '+DAYS[nxt.di].items[0].t+'（UTC+9）起';
+  el4.innerHTML=fmt(nxt.st-now);
+ }else{
+  el1.textContent='行程';el2.textContent='已结束，一路平安！';el3.textContent='';el4.innerHTML='';
+ }
+ // 时间显示
+ var opt={timeZone:'Asia/Tokyo',hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'};
+ var jst=new Date().toLocaleTimeString('zh-CN',opt);
+ var tzName=Intl.DateTimeFormat().resolvedOptions().timeZone||'本地';
+ var local=new Date().toLocaleTimeString('zh-CN',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+ document.getElementById('f-local').textContent='现在：日本 ' + jst + '（UTC+9） ｜ 你所在 ' + local + '（' + tzName + '）';
+}
+tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
